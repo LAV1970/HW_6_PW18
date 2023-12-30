@@ -1,30 +1,30 @@
 from faker import Faker
 import mysql.connector
 
-# Создайте подключение к базе данных
+# подключение к базе данных
 db_connection = mysql.connector.connect(
     host="localhost",
     user="root",
     password="MasooR_1924",
-    database="uni",  # Замените на имя вашей базы данных
+    database="uni",  # имя базы данных
 )
 
-# Создайте курсор для выполнения SQL-запросов
+# курсор для выполнения SQL-запросов
 cursor = db_connection.cursor()
 
-# Создайте генератор фальшивых данных
+# генератор фальшивых данных
 fake = Faker()
 
-# Определите количество записей, которые вы хотите добавить
-num_records = 100
+# количество записей, которые надо добавить
+num_records = 50
 
-# Создайте и выполните SQL-запрос для добавления данных
+# SQL-запрос для добавления данных
 for _ in range(num_records):
     name = fake.name()
     age = fake.random_int(min=18, max=99)
     cursor.execute("INSERT INTO student (name, age) VALUES (%s, %s)", (name, age))
 
-# Сделайте фиксацию изменений
+# фиксация изменений
 db_connection.commit()
 
 # Закройте курсор и соединение
