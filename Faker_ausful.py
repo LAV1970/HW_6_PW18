@@ -16,16 +16,15 @@ cursor = db_connection.cursor()
 fake = Faker()
 
 # Определите количество записей, которые вы хотите добавить
-num_records = 40
+num_records = 3
 
 # Создайте и выполните SQL-запрос для добавления данных
 for _ in range(num_records):
-    student_id = None  # Замените на значение student_id
-    name = fake.name()
-    age = fake.random_int(min=18, max=28)
+    name_group = fake.name()
+    fach = fake.random_int(min=1, max=8)
     cursor.execute(
-        "INSERT INTO student (student_id, name, age) VALUES (%s, %s, %s)",
-        (student_id, name, age),
+        "INSERT INTO groupps (name_group, fach) VALUES (%s, %s)",
+        (name_group, fach),
     )
 
 # Сделайте фиксацию изменений
