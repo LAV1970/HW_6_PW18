@@ -15,16 +15,32 @@ cursor = db_connection.cursor()
 # Создайте генератор фальшивых данных
 fake = Faker()
 
+# Определите предметы
+subjects = [
+    "Математика",
+    "Физика",
+    "Химия",
+    "Информатика",
+    "История",
+    "Язык и литература",
+    "Иностранный язык",
+    "Биология",
+]
+
 # Определите количество записей, которые вы хотите добавить
 num_records = 3
 
 # Создайте и выполните SQL-запрос для добавления данных
-for _ in range(num_records):
+for i in range(num_records):
     name_group = fake.name()
     fach = fake.random_int(min=1, max=8)
+
+    # Выберите случайный предмет из списка
+    subject = subjects[i % len(subjects)]
+
     cursor.execute(
-        "INSERT INTO groupps (name_group, fach) VALUES (%s, %s)",
-        (name_group, fach),
+        "INSERT INTO groupps (name_group, fach, subject) VALUES (%s, %s, %s)",
+        (name_group, fach, subject),
     )
 
 # Сделайте фиксацию изменений
