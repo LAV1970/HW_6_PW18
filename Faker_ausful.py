@@ -31,8 +31,13 @@ subjects = [
 num_records = 10
 
 # Создайте и выполните SQL-запрос для добавления данных
+group_names = [
+    "Автоматизация технологических процессов",
+    "Механика",
+    "Компьютерные науки",
+]
 for i in range(num_records):
-    name_group = fake.name()
+    name_group = group_names[i % len(group_names)]
     fach = fake.random_int(min=1, max=8)
 
     # Выберите случайный предмет из списка
