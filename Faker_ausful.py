@@ -15,37 +15,19 @@ cursor = db_connection.cursor()
 # Создайте генератор фальшивых данных
 fake = Faker()
 
-# Определите предметы
-subjects = [
-    "Математика",
-    "Физика",
-    "Химия",
-    "Информатика",
-    "История",
-    "Язык и литература",
-    "Иностранный язык",
-    "Биология",
-]
-
 # Определите количество записей, которые вы хотите добавить
-num_records = 10
+num_records = 5
+
+# Определите звания преподавателей
+degrees = ["Профессор", "Доцент", "Старший преподаватель", "Ассистент"]
 
 # Создайте и выполните SQL-запрос для добавления данных
-group_names = [
-    "Автоматизация технологических процессов",
-    "Механика",
-    "Компьютерные науки",
-]
-for i in range(num_records):
-    name_group = group_names[i % len(group_names)]
-    fach = fake.random_int(min=1, max=8)
-
-    # Выберите случайный предмет из списка
-    subject = subjects[i % len(subjects)]
-
+for _ in range(num_records):
+    name = fake.name()
+    degree = fake.random_element(elements=degrees)
     cursor.execute(
-        "INSERT INTO groupps (name_group, fach, subject) VALUES (%s, %s, %s)",
-        (name_group, fach, subject),
+        "INSERT INTO professor (name, degree) VALUES (%s, %s)",
+        (name, degree),
     )
 
 # Сделайте фиксацию изменений
