@@ -1,8 +1,8 @@
-SELECT g.name_group, AVG(CASE WHEN grade.subject_id = 5 THEN grade.grade_name END) AS average_grade
-FROM groupps g
-JOIN student s ON g.group_id = s.group_id
-JOIN grade ON s.student_id = grade.student_id
-WHERE g.fach = 'Механика'
-GROUP BY g.name_group
+SELECT groupps.name_group, AVG(grade.grade_name) AS average_grade
+FROM groupps
+JOIN student ON groupps.group_id = student.group_id
+JOIN grade ON student.name = grade.student AND groupps.subject = grade.subject_id
+WHERE grade.subject_id = 7 AND grade.grade_name IS NOT NULL
+GROUP BY groupps.name_group
 ORDER BY average_grade DESC
 LIMIT 0, 1000;
